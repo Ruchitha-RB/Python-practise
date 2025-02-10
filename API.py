@@ -8,7 +8,7 @@ data = {
     "status": False
 }
 # Dump the python dictionary into a JSON file
-with open("data.json", "w") as file:
+with open("data.json", "w") as file:#write into JSON file
     json.dump(data, file, indent=4)
 
 #Creating python dictionary and then dump into a JSON file
@@ -18,10 +18,15 @@ with open("Employee.json","w") as file:
 
 
 #Creating python dictionary, and then dump into a  JSON String
-    data = {"id": 106, "name": "Ruchi", "salary": 5555555.00, "status": True}
+    data = {"id": 106, "name": "Ruchi", "salary": 5555555.00}
     json_string = json.dumps(data,indent=2)  # Convert to JSON string
     print(json_string)  # Check JSON format
     print("Data Type:", type(json_string))
+    
+    
+#Read JSON DATA from a file
+    with open("Employee.json","r") as file:
+     
 
 
 
