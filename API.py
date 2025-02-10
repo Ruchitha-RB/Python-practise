@@ -1,5 +1,5 @@
 import json
-print(json.__file__)
+print(json.__file__)#checking the locaton of the file
 # Create a Python dictionary file
 data = {
     "id": 101,
