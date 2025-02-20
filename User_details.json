@@ -1,0 +1,65 @@
+[
+    {
+        "Username": "meena",
+        "Phone number": "9133",
+        "Email": "@gmail.com",
+        "Password": "asdfg",
+        "Initial_balance": 2000
+    },
+    {
+        "username": "Milku",
+        "phone_number": "133929840",
+        "email": "milk@gmail.com",
+        "password": "12345",
+        "initial_balance": 2000
+    },
+    {
+        "username": "de32qe",
+        "phone_number": "de",
+        "email": "d",
+        "password": "qwe",
+        "initial_balance": 2000
+    },
+    {
+        "username": "meena",
+        "phone_number": "9133929840",
+        "email": "meena@gmail.com",
+        "password": "1234",
+        "initial_balance": 5000
+    },
+    {
+        "username": "junnu",
+        "phone_number": "2133",
+        "email": "b@gmail.com",
+        "password": "zxc",
+        "initial_balance": 3000
+    },
+    {
+        "username": "bablu",
+        "phone_number": "9133440552",
+        "email": "bablu@gmail.com",
+        "password": "bableu",
+        "initial_balance": 6000
+    },
+    {
+        "username": "sasi",
+        "phone_number": "2112",
+        "email": "sasi@gmail.com",
+        "password": "sasi",
+        "initial_balance": 1000
+    },
+    {
+        "username": "ram",
+        "phone_number": "2134567",
+        "email": "ram@gmail.com",
+        "password": "ram",
+        "initial_balance": 1000
+    },
+    {
+        "username": "hari",
+        "phone_number": "987654",
+        "email": "hari@gmail.com",
+        "password": "hari",
+        "initial_balance": 3000
+    }
+]

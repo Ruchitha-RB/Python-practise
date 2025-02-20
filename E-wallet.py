@@ -39,8 +39,7 @@ def user_registration():
         "phone_number": phone_number,
         "email": email,
         "password": password,
-        "initial_balance": initial_balance,
-        "transaction":[]
+        "initial_balance": initial_balance
     }
     users = load_users()
     users.append(user_details)  # Append new user
@@ -97,19 +96,15 @@ def dashboard(user):
         dashboard(user)
 
 
-def transaction_history(user):
-    print("Transaction History:")
-    print(f"{'Time':<20} {'Type':<10} {'Amount':<10} {'Balance':<10}")
-    print("-" * 50)
-
-    if "transactions" in user and user["transactions"]:
-        for tx in user["transactions"]:
-            print(f"{tx['time']:<20} {tx['type']:<10} {tx['amount']:<10} {tx['balance']:<10}")
-    else:
-        print("No transactions found!")
-
-    time.sleep(3)
-    dashboard(user)
+trans_history = []
+def history(type, amount, balance):
+    transaction = {
+        "time": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "type": type,  # Deposit, Withdraw, Discount
+        "amount": amount,
+        "balance": balance
+    }
+    trans_history.append(transaction)
 
 def wallet_operations(user):
     users = load_users()
@@ -127,19 +122,13 @@ def wallet_operations(user):
         try:
             deposit = int(input("Enter the amount to deposit: "))
             user["initial_balance"] += deposit
-
-            # Ensure transactions list exists in user data
-            if "transactions" not in user:
-                user["transactions"] = []
-
-            # Save transaction inside user data
-            user["transactions"].append({
-                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            trans_history.append({
+                "time": datetime.now().strftime("%Y-%m-%d"),  # Only date
                 "type": "Deposit",
                 "amount": deposit,
                 "balance": user["initial_balance"]
             })
-
+            time.sleep(2)
             print("***Deposit Successful!***")
         except ValueError:
             print("Invalid amount! Enter numbers only.")
@@ -155,18 +144,12 @@ def wallet_operations(user):
             else:
                 user["initial_balance"] -= withdraw
                 print("***Withdrawal Successful!***")
-
-                # Ensure transactions list exists
-                if "transactions" not in user:
-                    user["transactions"] = []
-
-                # Save transaction inside user data
-                user["transactions"].append({
-                    "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "type": "Withdraw",
-                    "amount": withdraw,
-                    "balance": user["initial_balance"]
-                })
+            trans_history.append({
+                "time": datetime.now().strftime("%Y-%m-%d"),
+                "type": "Withdraw",
+                "amount": withdraw,
+                "balance": user["initial_balance"]
+            })
         except ValueError:
             print("Invalid amount! Enter numbers only.")
             time.sleep(3)
@@ -175,15 +158,8 @@ def wallet_operations(user):
     elif option == "4":
         dashboard(user)
         return
-
-    # Save user data to JSON file
-    for i in range(len(users)):
-        if users[i]["username"] == user["username"]:
-            users[i] = user
-            break
     save_users(users)  # Save changes
     wallet_operations(user)
-
 
 def coupons(user):
     users = load_users()
@@ -235,38 +211,23 @@ def transaction_history():
     for tx in trans_history:
         print(f"{tx['time']:<20} {tx['type']:<10} {tx['amount']:<10} {tx['balance']:<10}")
 
-
-def update_profile(user):
-    users = load_users()
-
-    print("Update Your Profile:")
-    new_username = input(f"New Username ({user['username']}): ").strip()
-    new_phone = input(f"New Phone Number ({user['phone_number']}): ").strip()
-    new_email = input(f"New Email ({user['email']}): ").strip()
-    new_password = input(f"New Password (leave empty to keep current): ").strip()
-
-    # Update only if the user provided new values
-    if new_username:
-        user["username"] = new_username
-    if new_phone:
-        user["phone_number"] = new_phone
-    if new_email:
-        user["email"] = new_email
-    if new_password:
-        user["password"] = new_password  # Consider hashing for better security
-
-    # Save the updated user data back to the JSON file
-    for i in range(len(users)):
-        if users[i]["email"] == user["email"]:  # Identify user by unique email
-            users[i] = user
-            break
-
-    save_users(users)
-    print("Profile updated successfully!")
-
+def update_profile(users=None):
+    global username, phone_number, email, password
+    print("Update the User profile")
     time.sleep(2)
-    dashboard(user)
 
+    new_username = input(f"New Username ({username}): ")
+    new_phone = input(f"New Phone Number ({phone_number}): ")
+    new_email = input(f"New Email ({email}): ")
+    new_password = input(f"New Password ({password}): ")
+
+    username = new_username or username
+    phone_number = new_phone or phone_number
+    email = new_email or email
+    password = new_password or password
+
+    save_users(users)  # Save updated details
+    print("User details updated successfully!")
 
 def homepage():
     print("\n1. Registration\n2. Login\n3. Exit")

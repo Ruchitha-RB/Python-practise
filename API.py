@@ -25,12 +25,15 @@ with open("Member.json", "r") as file:  # Read JSON from a file and convert to P
 
 # Example 3: Creating a Python dictionary and converting it into a JSON string
 dummy = {"id": 106, "name": "Ruchi", "salary": 5555555}
-json_string = json.dumps(dummy, indent=2) # Convert dictionary to JSON string
+json_string = json.dumps(dummy, indent=4) # Convert dictionary to JSON string
 print(json_string)  # Check JSON format
 print("Ex3=Data Type:", type(json_string))  # Should be <class 'str'> only for READ
 with open("dummy.json","r") as file:
     dfile=json.loads(json_string) # de-serialization
     print("JSON String to Python Object:",dfile)
+
+#-------------------------------------------------------------------------------
+
 
 
 
