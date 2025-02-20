@@ -51,14 +51,12 @@ def user_registration():
 
 def login():
     users = load_users()
-    print("Loaded users:", users)  # Debugging step
     print("Enter the details for Login")
 
     entered_username = input("Enter the username: ")
     entered_password = input("Enter the password: ")
 
     for user in users:
-        print("Checking user:", user)  # Debugging step
         if "username" not in user or "password" not in user:
             print("Error: Missing 'username' or 'password' in user data!")
             continue
